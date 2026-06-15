@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amit Derwal — AI-Enabled Operations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0a0a0a;
+    --white: #ffffff;
+    --gray-50: #f9f9f8;
+    --gray-100: #f0efed;
+    --gray-200: #e2e1de;
+    --gray-400: #9e9c98;
+    --gray-600: #5c5a56;
+    --gray-900: #1a1917;
+    --blue-50: #eef4fc;
+    --blue-600: #1a5fa5;
+    --green-50: #eaf3de;
+    --green-600: #3b6d11;
+    --amber-50: #faeeda;
+    --amber-600: #854f0b;
+    --accent: #0a0a0a;
+    --radius: 6px;
+    --radius-lg: 10px;
+  }
+
+  html { font-size: 16px; scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--white);
+    color: var(--black);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--gray-200);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 52px;
+  }
+  .nav-logo { font-size: 13px; font-weight: 500; letter-spacing: -0.01em; color: var(--black); }
+  .nav-links { display: flex; gap: 1.5rem; }
+  .nav-links a { font-size: 13px; color: var(--gray-600); transition: color 0.15s; }
+  .nav-links a:hover { color: var(--black); }
+  .nav-cta {
+    font-size: 12px; font-weight: 500;
+    background: var(--black); color: var(--white);
+    padding: 6px 14px; border-radius: var(--radius);
+    transition: opacity 0.15s;
+  }
+  .nav-cta:hover { opacity: 0.8; }
+
+  /* LAYOUT */
+  .container { max-width: 720px; margin: 0 auto; padding: 0 2rem; }
+
+  /* HERO */
+  .hero {
+    padding: 5rem 0 3.5rem;
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--gray-400);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .hero-name {
+    font-size: clamp(36px, 6vw, 52px);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    color: var(--black);
+    margin-bottom: 0.5rem;
+  }
+  .hero-role {
+    font-size: 18px;
+    color: var(--gray-600);
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+  }
+  .hero-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 2rem;
+  }
+  .pill {
+    font-size: 12px;
+    padding: 4px 12px;
+    border: 1px solid var(--gray-200);
+    border-radius: 20px;
+    color: var(--gray-600);
+    background: var(--gray-50);
+  }
+  .hero-about {
+    font-size: 15px;
+    color: var(--gray-900);
+    line-height: 1.75;
+    max-width: 600px;
+    margin-bottom: 2rem;
+  }
+  .metrics-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--gray-200);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+  .metric-box {
+    background: var(--white);
+    padding: 1rem 1.25rem;
+  }
+  .metric-val {
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--black);
+    line-height: 1.1;
+  }
+  .metric-label {
+    font-size: 11px;
+    color: var(--gray-400);
+    margin-top: 3px;
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* SECTIONS */
+  .section { padding: 3rem 0; border-bottom: 1px solid var(--gray-200); }
+  .section:last-of-type { border-bottom: none; }
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+  }
+  .section-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--gray-400);
+    text-transform: uppercase;
+  }
+
+  /* CASE STUDY CARDS */
+  .cs-grid { display: flex; flex-direction: column; gap: 1px; background: var(--gray-200); border: 1px solid var(--gray-200); border-radius: var(--radius-lg); overflow: hidden; }
+  .cs-card {
+    background: var(--white);
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: background 0.12s;
+    display: block;
+  }
+  .cs-card:hover { background: var(--gray-50); }
+  .cs-card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; }
+  .cs-tag {
+    font-size: 11px;
+    font-weight: 500;
+    font-family: 'DM Mono', monospace;
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+  .cs-company { font-size: 17px; font-weight: 500; letter-spacing: -0.01em; color: var(--black); margin-bottom: 4px; }
+  .cs-role { font-size: 13px; color: var(--gray-400); margin-bottom: 0.75rem; font-family: 'DM Mono', monospace; }
+  .cs-desc { font-size: 14px; color: var(--gray-600); line-height: 1.6; margin-bottom: 1rem; }
+  .cs-nums { display: flex; gap: 1.5rem; padding-top: 0.75rem; border-top: 1px solid var(--gray-100); }
+  .cs-num-val { font-size: 15px; font-weight: 500; color: var(--black); }
+  .cs-num-label { font-size: 11px; color: var(--gray-400); font-family: 'DM Mono', monospace; }
+  .cs-arrow { color: var(--gray-400); font-size: 18px; transition: transform 0.15s; }
+  .cs-card:hover .cs-arrow { transform: translateX(3px); }
+
+  /* CASE STUDY DETAIL PAGES */
+  .cs-detail { display: none; padding: 3rem 0; }
+  .cs-detail.active { display: block; }
+  .back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--gray-600);
+    margin-bottom: 2rem;
+    cursor: pointer;
+    transition: color 0.12s;
+  }
+  .back-btn:hover { color: var(--black); }
+  .detail-tag { display: inline-block; font-size: 11px; font-weight: 500; font-family: 'DM Mono', monospace; padding: 3px 10px; border-radius: 20px; margin-bottom: 1rem; }
+  .detail-title { font-size: 32px; font-weight: 500; letter-spacing: -0.02em; color: var(--black); margin-bottom: 4px; }
+  .detail-sub { font-size: 13px; color: var(--gray-400); font-family: 'DM Mono', monospace; margin-bottom: 1.5rem; }
+  .detail-divider { border: none; border-top: 1px solid var(--gray-200); margin: 1.5rem 0; }
+  .detail-section-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 0.6rem; }
+  .detail-body { font-size: 15px; color: var(--gray-900); line-height: 1.75; margin-bottom: 1rem; }
+  .detail-bullets { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 8px; margin-bottom: 1rem; }
+  .detail-bullets li { font-size: 14px; color: var(--gray-600); line-height: 1.65; padding-left: 16px; position: relative; }
+  .detail-bullets li::before { content: "—"; position: absolute; left: 0; color: var(--gray-200); }
+  .detail-bullets li strong { font-weight: 500; color: var(--black); }
+  .detail-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--gray-200); border: 1px solid var(--gray-200); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 1.5rem; }
+  .detail-metric { background: var(--white); padding: 1rem 1.25rem; }
+  .detail-metric-before { font-size: 10px; font-family: 'DM Mono', monospace; color: var(--gray-400); margin-bottom: 2px; }
+  .detail-metric-val { font-size: 20px; font-weight: 500; letter-spacing: -0.02em; color: var(--black); line-height: 1.1; }
+  .detail-metric-label { font-size: 10px; font-family: 'DM Mono', monospace; color: var(--gray-400); margin-top: 2px; }
+  .insight-block { border-left: 2px solid; padding: 1rem 1.25rem; border-radius: 0 var(--radius) var(--radius) 0; }
+  .insight-block p { font-size: 14px; line-height: 1.7; }
+
+  /* SKILLS */
+  .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--gray-200); border: 1px solid var(--gray-200); border-radius: var(--radius-lg); overflow: hidden; }
+  .skill-col { background: var(--white); padding: 1.25rem; }
+  .skill-col-title { font-size: 11px; font-family: 'DM Mono', monospace; color: var(--gray-400); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.75rem; }
+  .skill-item { font-size: 13px; color: var(--gray-900); padding: 5px 0; border-bottom: 1px solid var(--gray-100); }
+  .skill-item:last-child { border-bottom: none; }
+
+  /* CONTACT */
+  .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--gray-200); border: 1px solid var(--gray-200); border-radius: var(--radius-lg); overflow: hidden; }
+  .contact-item { background: var(--white); padding: 1rem 1.25rem; }
+  .contact-type { font-size: 10px; font-family: 'DM Mono', monospace; color: var(--gray-400); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
+  .contact-val { font-size: 13px; color: var(--black); font-weight: 500; }
+  .contact-val a { color: var(--black); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--gray-200); }
+  .contact-val a:hover { text-decoration-color: var(--black); }
+
+  /* RESUME */
+  .resume-row { display: flex; align-items: center; gap: 1rem; }
+  .resume-dl {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    background: var(--black);
+    color: var(--white);
+    padding: 9px 18px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+  .resume-dl:hover { opacity: 0.8; }
+  .resume-note { font-size: 12px; color: var(--gray-400); font-family: 'DM Mono', monospace; }
+
+  /* FOOTER */
+  footer { padding: 2rem 0; text-align: center; }
+  footer p { font-size: 12px; color: var(--gray-400); font-family: 'DM Mono', monospace; }
+
+  /* PAGES */
+  #home { display: block; }
+  #case-studies-detail { display: none; }
+
+  @media (max-width: 600px) {
+    nav { padding: 0 1rem; }
+    .container { padding: 0 1rem; }
+    .metrics-row { grid-template-columns: repeat(2, 1fr); }
+    .detail-metrics { grid-template-columns: repeat(2, 1fr); }
+    .skills-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .hero { padding: 3rem 0 2.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Amit Derwal</div>
+  <div class="nav-links">
+    <a href="#about-section" onclick="showHome()">About</a>
+    <a href="#case-studies-section" onclick="showHome()">Case Studies</a>
+    <a href="#contact-section" onclick="showHome()">Contact</a>
+  </div>
+  <a class="nav-cta" href="mailto:amiitderwal1997@gmail.com">Get in touch</a>
+</nav>
+
+<!-- HOME PAGE -->
+<div id="home">
+  <div class="container">
+
+    <section class="hero">
+      <div class="hero-eyebrow">Portfolio · 2026</div>
+      <h1 class="hero-name">Amit Derwal</h1>
+      <p class="hero-role">AI-Enabled Operations</p>
+      <div class="hero-pills">
+        <span class="pill">IIT Delhi</span>
+        <span class="pill">675,000+ assets digitized</span>
+        <span class="pill">6× industry benchmark</span>
+        <span class="pill">4 cities · 90+ people</span>
+      </div>
+      <p class="hero-about" id="about-section">I build operational systems that work at scale — and use AI to make them faster than traditional teams can manage manually. At Edge Industries I digitized 675,000+ utility assets across 3 cities in 6 months, against a 2-year industry benchmark, at 40–60% of budget. At Neelkanth I grew a client base 5× in 3 months by redesigning the delivery system. At Avant Garde I built a community-driven product loop that delivered 10× weekly sales growth with zero ad spend.</p>
+      <div class="metrics-row">
+        <div class="metric-box">
+          <div class="metric-val">675K+</div>
+          <div class="metric-label">assets digitized</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-val">6×</div>
+          <div class="metric-label">faster than benchmark</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-val">10×</div>
+          <div class="metric-label">sales growth</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-val">90+</div>
+          <div class="metric-label">team at peak</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="case-studies-section">
+      <div class="section-header">
+        <span class="section-title">Case Studies</span>
+      </div>
+      <div class="cs-grid">
+
+        <a class="cs-card" onclick="showCase('edge'); return false;" href="#">
+          <div class="cs-card-top">
+            <span class="cs-tag" style="background:#eef4fc; color:#1a5fa5;">Scale & Systems</span>
+            <span class="cs-arrow">→</span>
+          </div>
+          <div class="cs-company">Edge Industries</div>
+          <div class="cs-role">Operations Lead · Kota Zone · Jun 2025 – Jan 2026</div>
+          <div class="cs-desc">Built operational network from zero across 4 cities. Sourced ground-truth data from government records. Introduced split-team convergence deployment that doubled daily coverage speed.</div>
+          <div class="cs-nums">
+            <div><div class="cs-num-val">675,000+</div><div class="cs-num-label">assets digitized</div></div>
+            <div><div class="cs-num-val">6× faster</div><div class="cs-num-label">than benchmark</div></div>
+            <div><div class="cs-num-val">40–60%</div><div class="cs-num-label">budget used</div></div>
+          </div>
+        </a>
+
+        <a class="cs-card" onclick="showCase('neelkanth'); return false;" href="#">
+          <div class="cs-card-top">
+            <span class="cs-tag" style="background:#eaf3de; color:#3b6d11;">Business Thinking</span>
+            <span class="cs-arrow">→</span>
+          </div>
+          <div class="cs-company">Neelkanth Engineering</div>
+          <div class="cs-role">Operations & Delivery Lead · Mar 2023 – Feb 2025</div>
+          <div class="cs-desc">Identified warehouse location as root logistics bottleneck. Consolidated 3 facilities into 2. Built delivery scheduling system that eliminated partial shipments and 5×'d the client base.</div>
+          <div class="cs-nums">
+            <div><div class="cs-num-val">5× clients</div><div class="cs-num-label">in 3 months</div></div>
+            <div><div class="cs-num-val">−20%</div><div class="cs-num-label">net rent</div></div>
+          </div>
+        </a>
+
+        <a class="cs-card" onclick="showCase('avant'); return false;" href="#">
+          <div class="cs-card-top">
+            <span class="cs-tag" style="background:#faeeda; color:#854f0b;">D2C Growth</span>
+            <span class="cs-arrow">→</span>
+          </div>
+          <div class="cs-company">Avant Garde</div>
+          <div class="cs-role">Founder's Office · Jewellery D2C · Mar 2022 – Feb 2023</div>
+          <div class="cs-desc">Built community-driven product loop — audience voted on designs before production. Created brand collab network for distribution at zero ad spend. Grew weekly units 10× in one year.</div>
+          <div class="cs-nums">
+            <div><div class="cs-num-val">10×</div><div class="cs-num-label">weekly units</div></div>
+            <div><div class="cs-num-val">₹0</div><div class="cs-num-label">ad spend</div></div>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header"><span class="section-title">Skills</span></div>
+      <div class="skills-grid">
+        <div class="skill-col">
+          <div class="skill-col-title">Operations</div>
+          <div class="skill-item">Multi-city team leadership</div>
+          <div class="skill-item">SOP design & process improvement</div>
+          <div class="skill-item">Field operations & deployment planning</div>
+          <div class="skill-item">P&L ownership & budget management</div>
+          <div class="skill-item">TAT & SLA management</div>
+          <div class="skill-item">Cross-functional coordination</div>
+        </div>
+        <div class="skill-col">
+          <div class="skill-col-title">AI & Technical</div>
+          <div class="skill-item">Multi-agent orchestration</div>
+          <div class="skill-item">ML lead scoring & outreach automation</div>
+          <div class="skill-item">Claude API · n8n · LangChain</div>
+          <div class="skill-item">Python · Supabase · Next.js</div>
+          <div class="skill-item">Playwright (browser automation)</div>
+          <div class="skill-item">Prompt engineering & RAG systems</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header"><span class="section-title">Resume</span></div>
+      <div class="resume-row">
+        <a class="resume-dl" href="Amit_Derwal_Resume.docx" download>↓ Download Resume</a>
+        <span class="resume-note">Harvard format · IIT Delhi · Updated Jun 2026</span>
+      </div>
+    </section>
+
+    <section class="section" id="contact-section">
+      <div class="section-header"><span class="section-title">Contact</span></div>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <div class="contact-type">Email</div>
+          <div class="contact-val"><a href="mailto:amiitderwal1997@gmail.com">amiitderwal1997@gmail.com</a></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-type">LinkedIn</div>
+          <div class="contact-val"><a href="https://linkedin.com/in/amitderwal" target="_blank">linkedin.com/in/amitderwal</a></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-type">GitHub</div>
+          <div class="contact-val"><a href="https://github.com/clowNox" target="_blank">github.com/clowNox</a></div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<!-- CASE STUDY DETAIL PAGES -->
+<div id="case-studies-detail">
+  <div class="container">
+
+    <!-- EDGE -->
+    <div class="cs-detail" id="detail-edge">
+      <span class="back-btn" onclick="showHome()">← Back to portfolio</span>
+      <span class="detail-tag" style="background:#eef4fc; color:#1a5fa5;">Scale & Systems</span>
+      <h2 class="detail-title">Edge Industries</h2>
+      <p class="detail-sub">Operations Lead · Kota Zone · Jun 2025 – Jan 2026</p>
+      <hr class="detail-divider">
+
+      <p class="detail-section-label">The situation</p>
+      <p class="detail-body">Edge Industries was scaling a utility asset digitization program across multiple cities. Teams were deployed against incomplete, inaccurate data. Nobody knew the real asset count on the ground. Previous benchmark: 2 cities in 2 years. I was given 5 people and one city, starting from zero.</p>
+
+      <hr class="detail-divider">
+      <p class="detail-section-label">What was broken</p>
+      <ul class="detail-bullets">
+        <li><strong>No ground-truth data</strong> — asset lists sourced from incomplete internal records, teams deployed blind</li>
+        <li><strong>Sequential deployment</strong> — one team, one starting point, dead travel time between assets</li>
+        <li><strong>No verification structure</strong> — quality unchecked, errors caught late or not at all</li>
+        <li><strong>No onboarding system</strong> — every new hire learned verbally, inconsistent output from day one</li>
+      </ul>
+
+      <hr class="detail-divider">
+      <p class="detail-section-label">What I built</p>
+      <ul class="detail-bullets">
+        <li><strong>Ground-truth database</strong> — sourced real asset data directly from government planning departments, replacing internal records</li>
+        <li><strong>Convergence deployment model</strong> — split each team into Team A and Team B, assigned opposite ends of each zone, both converging to the middle simultaneously</li>
+        <li><strong>Deployment calendars</strong> — planned around geography, weather patterns, and local holiday schedules</li>
+        <li><strong>3-layer verification chain</strong> — field associate → operations manager (daily) → computer operator (weekly) → me</li>
+        <li><strong>Dedicated substation team</strong> — 6 people across 3 cities assigned solely to substation digitization</li>
+        <li><strong>DISCOM relationships</strong> — direct contacts with state electricity board employees for ground intelligence</li>
+        <li><strong>Role-specific SOPs</strong> — structured onboarding for every position, replacing verbal handoffs</li>
+      </ul>
+
+      <hr class="detail-divider">
+      <p class="detail-section-label">Results</p>
+      <div class="detail-metrics">
+        <div class="detail-metric"><div class="detail-metric-before">started at</div><div class="detail-metric-val">0 → 675K+</div><div class="detail-metric-label">assets digitized</div></div>
+        <div class="detail-metric"><div class="detail-metric-before">benchmark</div><div class="detail-metric-val">6×</div><div class="detail-metric-label">faster execution</div></div>
+        <div class="detail-metric"><div class="detail-metric-before">team scaled</div><div class="detail-metric-val">5 → 90+</div><div class="detail-metric-label">people</div></div>
+        <div class="detail-metric"><div class="detail-metric-before">budget used</div><div class="detail-metric-val">40–60%</div><div class="detail-metric-label">at peak ops</div></div>
+        <div class="detail-metric"><div class="detail-metric-before">substations</div><div class="detail-metric-val">609</div><div class="detail-metric-label">supervised</div></div>
+        <div class="detail-metric"><div class="detail-metric-before">completion</div><div class="detail-metric-val">3 cities</div><div class="detail-metric-label">in 6 months</div></div>
+      </div>
+
+      <div class="insight-block" style="border-color:#1a5fa5; background:#eef4fc;">
+        <p style="color:#1a5fa5;"><strong>Core insight:</strong> The operation unlocked when I found the real data before anyone else did. Every other improvement — convergence deployment, verification chains, SOPs — was execution. The information gap was the actual problem.</p>
+      </div>
+    </div>
+
+    <!-- NEELKANTH -->
+    <div class="cs-detail" id="detail-neelkanth">
+      <span class="back-btn" onclick="showHome()">← Back to portfolio</span>
+      <span class="detail-tag" style="background:#eaf3de; color:#3b6d11;">Business Thinking</span>
+      <h2 class="detail-title">Neelkanth Engineering</h2>
+      <p class="detail-sub">Operations & Delivery Lead · Electrical Panels · Mar 2023 – Feb 2025</p>
+      <hr class="detail-divider">
+
+      <p class="detail-section-label">The situation</p>
+      <p class="detail-body">Neelkanth manufactured electrical distribution panels and circuit boxes. Orders were inconsistent — 4 clients per month. Three separate facilities bleeding rent. Deliveries partial and late. No scheduling system, no pipeline, no consolidated operations.</p>
+
+      <hr class="detail-divider">
+      <p class="detail-section-label">What was broken</p>
+      <ul class="detail-bullets">
+        <li><strong>No delivery scheduling</strong> — partial shipments and missed timelines damaging client trust</li>
+        <li><strong>Wrong location</strong> — warehouse 45 min to 1.5 hrs from main highway, unpredictable transport</li>
+        <li><strong>3 separate facilities</strong> — manufacturing, warehouse, office each paying rent, fragmented operations</li>
+        <li><strong>Thin pipeline</strong> — 4 clients per month with no system to grow or retain</li>
+      </ul>
+
+      <hr class="detail-divider">
+      <p class="detail-section-label">What I built</p>
+      <ul class="detail-bullets">
+        <li><strong>Projected delivery timeline system</strong> — scheduled all orders by capacity, renegotiated delivery windows upfront, eliminated partial shipments</li>
+        <li><strong>Strategic warehouse relocation</strong> — proposed and executed move near Dwarka–Gurgaon Expressway, cutting transport unpredictability</li>
+        <li><strong>Facility consolidation</strong> — merged 3 locations into 2, office inside warehouse, professional rebrand</li>
+        <li><strong>End-to-end delivery ownership</strong> — contract to final payment, client representative QA inspections before every shipment</li>
+        <li><strong>Client pipeline</strong> — grew from reactive order-taking to 20 contracted clients with forward commitments</li>
+      </ul>
+
+      <hr class="detail-divider">
+      <p class="detail-section-label">Results</p>
+      <div class="detail-metrics">
+        <div class="detail-metric"><div class="detail-metric-before">clients</div><div class="detail-metric-val">4 → 20</div><div class="detail-metric-label">in 3 months</div></div>
+        <div class="detail-metric"><div class="detail-metric-before">growth</div><div class="detail-metric-val">5×</div><div class="detail-metric-label">client base</div></div>
+        <div class="detail-metric"><div class="detail-metric-before">net rent</div><div class="detail-metric-val">−20%</div><div class="detail-metric-label">over 2 years</div></div>
+        <div class="detail-metric"><div class="detail-metric-before">locations</div><div class="detail-metric-val">3 → 2</div><div class="detail-metric-label">consolidated</div></div>
+      </div>
+
+      <div class="insight-block" style="border-color:#3b6d11; background:#eaf3de;">
+        <p style="color:#3b6d11;"><strong>Core insight:</strong> Cheap rent was expensive. The warehouse location was costing more in lost time and missed deliveries than the savings were worth. Making that business case — not just the operational fix — was the decision that unlocked everything else.</p>
+      </div>
+    </div>
+
+    <!-- AVANT GARDE -->
+    <div class="cs-detail" id="detail-avant">
+      <span class="back-btn" onclick="showHome()">← Back to portfolio</span>
+      <span class="detail-tag" style="background:#faeeda; color:#854f0b;">D2C Growth</span>
+      <h2 class="detail-title">Avant Garde</h2>
+      <p class="detail-sub">Founder's Office · Jewellery D2C · Mar 2022 – Feb 2023</p>
+      <hr class="detail-divider">
+
+      <p class="detail-section-label">The situation</p>
+      <p class="detail-body">Avant Garde made resin and clay jewellery for teenagers and young couples. Selling 10–15 units per week through physical college fest stalls. No online presence, no demand validation, no distribution system. Products made on instinct.</p>
+
+      <hr class="detail-divider">
+      <p class="detail-section-label">What was broken</p>
+      <ul class="detail-bullets">
+        <li><strong>No feedback loop</strong> — products manufactured on guesswork, no validation before production spend</li>
+        <li><strong>Single channel dependency</strong> — 100% revenue from physical college fest stalls, no digital fallback</li>
+        <li><strong>No distribution leverage</strong> — growing alone, no partnerships, no network effect</li>
+      </ul>
+
+      <hr class="detail-divider">
+      <p class="detail-section-label">What I built</p>
+      <ul class="detail-bullets">
+        <li><strong>Community design loop</strong> — collected design ideas via Instagram and Facebook, let audience vote, only winning designs went to production</li>
+        <li><strong>Brand collaboration network</strong> — partnered with complementary small brands, cross-promoted, built distribution at zero ad spend</li>
+        <li><strong>College fest stall network</strong> — systematised the physical sales channel across multiple fests as primary revenue engine</li>
+      </ul>
+
+      <hr class="detail-divider">
+      <p class="detail-section-label">Results</p>
+      <div class="detail-metrics">
+        <div class="detail-metric"><div class="detail-metric-before">weekly units</div><div class="detail-metric-val">10×</div><div class="detail-metric-label">growth in one year</div></div>
+        <div class="detail-metric"><div class="detail-metric-before">peak output</div><div class="detail-metric-val">150+</div><div class="detail-metric-label">units per week</div></div>
+        <div class="detail-metric"><div class="detail-metric-before">ad spend</div><div class="detail-metric-val">₹0</div><div class="detail-metric-label">on distribution</div></div>
+      </div>
+
+      <div class="insight-block" style="border-color:#854f0b; background:#faeeda;">
+        <p style="color:#854f0b;"><strong>Hard lesson:</strong> Single-channel dependency kills businesses. COVID hit, physical stalls shut down, no digital fallback. The business closed. I don't build single-point-of-failure systems anymore — every model I design now has a redundancy layer from day one.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <p>Amit Derwal · amiitderwal1997@gmail.com · github.com/clowNox</p>
+  </div>
+</footer>
+
+<script>
+  function showCase(id) {
+    document.getElementById('home').style.display = 'none';
+    document.getElementById('case-studies-detail').style.display = 'block';
+    document.querySelectorAll('.cs-detail').forEach(el => el.classList.remove('active'));
+    document.getElementById('detail-' + id).classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  function showHome() {
+    document.getElementById('home').style.display = 'block';
+    document.getElementById('case-studies-detail').style.display = 'none';
+    window.scrollTo(0, 0);
+  }
+</script>
+</body>
+</html>
