@@ -1,0 +1,423 @@
+/* CSS Assignment: Personal Resume Website
+   The HTML contains the resume information.
+   This file controls colours, spacing, fonts and layout. */
+
+/* 1. Basic page styling (element selectors) */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: #f5f7fb;
+  color: #253047;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+a {
+  color: #2058a5;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+h1, h2, p {
+  margin-top: 0;
+}
+
+/* 2. Navigation bar: display flex puts items on one row */
+nav {
+  position: sticky;
+  top: 0;
+  background-color: #ffffff;
+  border-bottom: 1px solid #dde4ee;
+  padding: 14px 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  z-index: 10;
+}
+
+.nav-logo {
+  color: #173b72;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.nav-links {
+  display: flex;
+  gap: 24px;
+}
+
+.nav-links a {
+  font-size: 14px;
+  color: #34435c;
+}
+
+.nav-cta, .resume-dl {
+  display: inline-block;
+  background-color: #2058a5;
+  color: white;
+  border-radius: 6px;
+  padding: 9px 16px;
+  font-size: 14px;
+}
+
+.nav-cta:hover, .resume-dl:hover {
+  background-color: #173b72;
+  text-decoration: none;
+}
+
+/* 3. Main content: keep everything centred */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* 4. About / introduction section */
+.hero {
+  background-color: white;
+  padding: 54px 30px 36px;
+  margin-top: 28px;
+  border: 1px solid #dde4ee;
+  border-radius: 12px;
+}
+
+.hero-eyebrow, .section-title {
+  color: #2058a5;
+  font-size: 13px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.hero-name {
+  color: #173b72;
+  font-size: 44px;
+  margin-bottom: 2px;
+}
+
+.hero-role {
+  color: #52627a;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.hero-about {
+  max-width: 760px;
+  margin: 20px 0;
+}
+
+.hero-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pill {
+  background-color: #e9f0fb;
+  color: #173b72;
+  border-radius: 20px;
+  padding: 5px 12px;
+  font-size: 12px;
+}
+
+/* 5. Simple cards for the numbers and case studies */
+.metrics-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.metric-box, .skill-col, .contact-item, .detail-metric {
+  background-color: #ffffff;
+  border: 1px solid #dde4ee;
+  border-radius: 8px;
+  padding: 18px;
+}
+
+.metric-box {
+  background-color: #eef4ff;
+  text-align: center;
+}
+
+.metric-val {
+  color: #173b72;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.metric-label, .cs-num-label, .detail-metric-label {
+  color: #62718a;
+  font-size: 12px;
+}
+
+/* 6. Sections and experience cards */
+.section {
+  padding: 32px 0;
+  border-bottom: 1px solid #dde4ee;
+}
+
+.section-header {
+  margin-bottom: 16px;
+}
+
+.cs-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.cs-card {
+  display: block;
+  background-color: white;
+  border: 1px solid #dde4ee;
+  border-radius: 10px;
+  padding: 22px;
+  color: #253047;
+}
+
+.cs-card:hover {
+  border-color: #2058a5;
+  background-color: #f9fbff;
+  text-decoration: none;
+}
+
+.cs-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.cs-tag, .detail-tag {
+  display: inline-block;
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-size: 12px;
+}
+
+.cs-arrow {
+  color: #2058a5;
+  font-size: 22px;
+}
+
+.cs-company {
+  color: #173b72;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.cs-role, .detail-sub {
+  color: #62718a;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+.cs-desc {
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.cs-nums {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  border-top: 1px solid #e5eaf2;
+  padding-top: 12px;
+}
+
+.cs-num-val {
+  font-weight: bold;
+  color: #173b72;
+}
+
+/* 7. Skills and contact: two simple CSS grids */
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.skill-col-title, .contact-type {
+  color: #2058a5;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.skill-item {
+  padding: 7px 0;
+  border-bottom: 1px solid #e5eaf2;
+  font-size: 14px;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.contact-val {
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+
+.resume-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.resume-note {
+  color: #62718a;
+  font-size: 13px;
+}
+
+/* 8. Case study details: preserve the original functionality */
+#home {
+  display: block;
+}
+
+#case-studies-detail {
+  display: none;
+}
+
+.cs-detail {
+  display: none;
+  padding: 32px 0;
+}
+
+.cs-detail.active {
+  display: block;
+}
+
+.back-btn {
+  display: inline-block;
+  color: #2058a5;
+  cursor: pointer;
+  margin-bottom: 24px;
+}
+
+.detail-title {
+  font-size: 32px;
+  color: #173b72;
+  margin-bottom: 4px;
+}
+
+.detail-divider {
+  border: 0;
+  border-top: 1px solid #dde4ee;
+  margin: 20px 0;
+}
+
+.detail-section-label {
+  color: #2058a5;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.detail-body, .detail-bullets {
+  font-size: 15px;
+}
+
+.detail-bullets li {
+  margin-bottom: 8px;
+}
+
+.detail-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.detail-metric-before {
+  color: #62718a;
+  font-size: 12px;
+}
+
+.detail-metric-val {
+  color: #173b72;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.insight-block {
+  border-left: 4px solid #2058a5;
+  border-radius: 6px;
+  padding: 16px;
+}
+
+/* 9. Footer */
+footer {
+  text-align: center;
+  color: #62718a;
+  padding: 28px 0;
+  font-size: 13px;
+}
+
+/* 10. ID selector for scrolling to the About section */
+#about-section {
+  scroll-margin-top: 90px;
+}
+
+/* 11. Mobile view: cards stack vertically on small screens */
+@media (max-width: 650px) {
+  nav {
+    flex-wrap: wrap;
+    padding: 12px 20px;
+  }
+
+  .nav-links {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    gap: 18px;
+  }
+
+  .hero {
+    padding: 30px 20px;
+  }
+
+  .hero-name {
+    font-size: 34px;
+  }
+
+  .metrics-row, .skills-grid, .detail-metrics {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .container {
+    padding: 0 16px;
+  }
+}
+
+@media (max-width: 420px) {
+  .metrics-row, .skills-grid, .detail-metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .nav-links {
+    gap: 12px;
+  }
+}
